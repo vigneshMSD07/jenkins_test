@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'linux'
-    }
+    agent any
     
     tools {
         maven "MVN3"
@@ -31,6 +29,9 @@ pipeline {
             }
         }
         stage('test') {
+            agent {
+                label 'linux'
+            }
             steps {
                 sh 'echo testing'
             }
