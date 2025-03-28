@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'windows'
+    }
     
     tools {
         maven "MVN3"
@@ -14,7 +16,7 @@ pipeline {
         
         stage('build') {
             steps {
-                sh "mvn -f api-gateway/ clean package"
+                bat "mvn -f api-gateway/ clean package"
             }
         }
         
@@ -29,11 +31,8 @@ pipeline {
             }
         }
         stage('test') {
-            agent {
-                label 'windows'
-            }
             steps {
-                sh 'echo testing'
+                bat 'echo testing'
             }
         }
     }
