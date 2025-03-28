@@ -18,10 +18,19 @@ pipeline {
             }
         }
         
-        stage('publish') {
+        stage('archival') {
             steps {
                 archiveArtifacts artifacts: 'api-gateway/target/*.jar', followSymlinks: false
+            }
+        }
+        stage('publish') {
+            steps {
                 junit stdioRetention: '', testResults: 'api-gateway/target/surefire-reports/*.xml'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'echo testing'
             }
         }
     }
